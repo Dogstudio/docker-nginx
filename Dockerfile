@@ -12,5 +12,4 @@ RUN mkdir -p /var/www
 WORKDIR /var/www
 VOLUME /var/www
 
-CMD ["nginx", "-g", "daemon off;"]
 EXPOSE 80 443
