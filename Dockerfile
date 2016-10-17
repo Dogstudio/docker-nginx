@@ -1,9 +1,8 @@
 FROM nginx
 MAINTAINER Dogstudio <developers@dogstudio.be>
 
-RUN sed -i -e "/user/s/nginx/www-data/g" /etc/nginx/nginx.conf
-RUN rm /etc/nginx/conf.d/default.conf
-ADD ./default.conf /etc/nginx/conf.d/
+COPY nginx/*.conf /etc/nginx/
+COPY nginx/conf.d/*.conf /etc/nginx/conf.d/
 
 RUN ln -sf /dev/stdout /var/log/nginx/access.log
 RUN ln -sf /dev/stderr /var/log/nginx/error.log
@@ -13,4 +12,5 @@ RUN mkdir -p /var/www
 WORKDIR /var/www
 VOLUME /var/www
 
+CMD ["nginx", "-g", "daemon off;"]
 EXPOSE 80 443
